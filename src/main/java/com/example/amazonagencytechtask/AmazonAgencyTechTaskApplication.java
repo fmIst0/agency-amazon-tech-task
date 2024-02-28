@@ -13,14 +13,4 @@ public class AmazonAgencyTechTaskApplication {
     public static void main(String[] args) {
         SpringApplication.run(AmazonAgencyTechTaskApplication.class, args);
     }
-
-    @Bean
-    CommandLineRunner runner(UserRepository repository) {
-        return args -> {
-          User user = new User();
-          user.setEmail("email");
-          user.setPassword("password");
-          repository.insert(user);
-        };
-    }
 }
