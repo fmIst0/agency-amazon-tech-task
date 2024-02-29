@@ -1,4 +1,4 @@
-package com.example.amazonagencytechtask.model;
+package com.example.amazonagencytechtask.model.db_collections.statistics.salesData;
 
 import lombok.Getter;
 import lombok.Setter;
