@@ -1,24 +1,17 @@
-package com.example.amazonagencytechtask.model.db_collections;
+package com.example.amazonagencytechtask.model.db_collections.statistics.salesData;
 
-import com.example.amazonagencytechtask.model.SalesData;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@Document(collection = "salesAndTrafficByDate")
-public class SalesAndTrafficByDate {
-    @Id
-    private String id;
-    private String date;
-    private SalesData salesByDate;
+public class SalesByDate {
+    private SalesData orderedProductSales;
     private SalesData orderedProductSalesB2B;
     private Integer unitsOrdered;
     private Integer unitsOrderedB2B;
     private Integer totalOrderItems;
-    private  Integer totalOrderItemsB2B;
+    private Integer totalOrderItemsB2B;
     private SalesData averageSalesPerOrderItem;
     private SalesData averageSalesPerOrderItemB2B;
     private Double averageUnitsPerOrderItem;

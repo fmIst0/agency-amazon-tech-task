@@ -1,17 +1,13 @@
-package com.example.amazonagencytechtask.model.db_collections;
+package com.example.amazonagencytechtask.model.db_collections.statistics;
 
 import com.example.amazonagencytechtask.model.ReportOptions;
 import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@Document(collection = "reportSpecifications")
 public class ReportSpecification {
-    @Id
     private String id;
     private ReportType reportType;
     private ReportOptions reportOptions;
