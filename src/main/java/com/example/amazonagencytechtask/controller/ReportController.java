@@ -5,6 +5,7 @@ import com.example.amazonagencytechtask.model.db_collections.statistics.SalesAnd
 import com.example.amazonagencytechtask.model.db_collections.statistics.summaryStatistics.byAsin.SummaryStatisticsByAsin;
 import com.example.amazonagencytechtask.model.db_collections.statistics.summaryStatistics.byDate.SummaryStatisticsByDate;
 import com.example.amazonagencytechtask.service.ReportService;
+import com.example.amazonagencytechtask.service.scheduler.CustomScheduler;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping(value = "/reports")
 public class ReportController {
+    private final CustomScheduler customScheduler;
     private final ReportService reportService;
 
     @GetMapping("/by-date")
@@ -40,11 +42,13 @@ public class ReportController {
 
     @GetMapping("/search-by-asins")
     public List<SalesAndTrafficByAsin> getDataByAsins(@RequestParam("parentAsins") List<String> asins) {
+        customScheduler.updateDataByAsinsCache(asins);
         return reportService.findDataByAsins(asins);
     }
 
     @GetMapping("/search-by-date")
     public List<SalesAndTrafficByDate> getDataByDates(@RequestParam("date") List<String> dates) {
+        customScheduler.updateDataByDatesCache(dates);
         return reportService.findDataByDates(dates);
     }
 }

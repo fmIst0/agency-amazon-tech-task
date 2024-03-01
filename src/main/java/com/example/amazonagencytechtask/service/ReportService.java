@@ -12,11 +12,10 @@ public interface ReportService {
     List<SalesAndTrafficByAsin> findAllSalesAndTrafficByAsin();
 
     SummaryStatisticsByDate findSummaryStatisticsOfAllSalesAndTrafficByDate();
+
     SummaryStatisticsByAsin findSummaryStatisticsOfAllSalesAndTrafficByAsin();
 
     List<SalesAndTrafficByAsin> findDataByAsins(List<String> asins);
 
     List<SalesAndTrafficByDate> findDataByDates(List<String> dates);
-
-    void updateReportFromFile();
 }
