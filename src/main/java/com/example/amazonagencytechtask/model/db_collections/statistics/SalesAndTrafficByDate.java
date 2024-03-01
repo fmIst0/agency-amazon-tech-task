@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SalesAndTrafficByDate {
-    private String id;
     private String date;
     private SalesByDate salesByDate;
     private TrafficByDate trafficByDate;

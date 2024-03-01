@@ -7,10 +7,16 @@ import com.example.amazonagencytechtask.model.db_collections.statistics.summaryS
 import java.util.List;
 
 public interface ReportService {
-    List<SalesAndTrafficByDate> findAllSalesAndTrafficByDate(String reportId);
+    List<SalesAndTrafficByDate> findAllSalesAndTrafficByDate();
 
-    List<SalesAndTrafficByAsin> findAllSalesAndTrafficByAsin(String reportId);
+    List<SalesAndTrafficByAsin> findAllSalesAndTrafficByAsin();
 
-    SummaryStatisticsByDate findSummaryStatisticsOfAllSalesAndTrafficByDate(String reportId);
-    SummaryStatisticsByAsin findSummaryStatisticsOfAllSalesAndTrafficByAsin(String reportId);
+    SummaryStatisticsByDate findSummaryStatisticsOfAllSalesAndTrafficByDate();
+    SummaryStatisticsByAsin findSummaryStatisticsOfAllSalesAndTrafficByAsin();
+
+    List<SalesAndTrafficByAsin> findDataByAsins(List<String> asins);
+
+    List<SalesAndTrafficByDate> findDataByDates(List<String> dates);
+
+    void updateReportFromFile();
 }

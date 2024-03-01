@@ -7,9 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 public class SalesAndTrafficByAsin {
-    private String id;
     private String parentAsin;
     private SalesByAsin salesByAsin;
     private TrafficByAsin trafficByAsin;
