@@ -8,8 +8,8 @@ import com.example.amazonagencytechtask.service.ReportService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,23 +18,33 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReportController {
     private final ReportService reportService;
 
-    @GetMapping("/{reportId}/by-date")
-    public List<SalesAndTrafficByDate> getAllSalesAndTrafficByDate(@PathVariable String reportId) {
-        return reportService.findAllSalesAndTrafficByDate(reportId);
+    @GetMapping("/by-date")
+    public List<SalesAndTrafficByDate> getAllSalesAndTrafficByDate() {
+        return reportService.findAllSalesAndTrafficByDate();
     }
 
-    @GetMapping("/{reportId}/by-asin")
-    public List<SalesAndTrafficByAsin> getAllSalesAndTrafficByAsin(@PathVariable String reportId) {
-        return reportService.findAllSalesAndTrafficByAsin(reportId);
+    @GetMapping("/by-asin")
+    public List<SalesAndTrafficByAsin> getAllSalesAndTrafficByAsin() {
+        return reportService.findAllSalesAndTrafficByAsin();
     }
 
-    @GetMapping("/{reportId}/summary-statistics-by-date")
-    public SummaryStatisticsByDate getSummaryStatisticsOfAllSalesAndTrafficByDate(@PathVariable String reportId) {
-        return reportService.findSummaryStatisticsOfAllSalesAndTrafficByDate(reportId);
+    @GetMapping("/summary-statistics-by-date")
+    public SummaryStatisticsByDate getSummaryStatisticsOfAllSalesAndTrafficByDate() {
+        return reportService.findSummaryStatisticsOfAllSalesAndTrafficByDate();
     }
 
-    @GetMapping("/{reportId}/summary-statistics-by-asin")
-    public SummaryStatisticsByAsin getSummaryStatisticsOfAllSalesAndTrafficByAsin(@PathVariable String reportId) {
-        return reportService.findSummaryStatisticsOfAllSalesAndTrafficByAsin(reportId);
+    @GetMapping("/summary-statistics-by-asin")
+    public SummaryStatisticsByAsin getSummaryStatisticsOfAllSalesAndTrafficByAsin() {
+        return reportService.findSummaryStatisticsOfAllSalesAndTrafficByAsin();
+    }
+
+    @GetMapping("/search-by-asins")
+    public List<SalesAndTrafficByAsin> getDataByAsins(@RequestParam("parentAsins") List<String> asins) {
+        return reportService.findDataByAsins(asins);
+    }
+
+    @GetMapping("/search-by-date")
+    public List<SalesAndTrafficByDate> getDataByDates(@RequestParam("date") List<String> dates) {
+        return reportService.findDataByDates(dates);
     }
 }
