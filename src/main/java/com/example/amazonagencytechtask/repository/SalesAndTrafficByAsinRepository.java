@@ -4,8 +4,9 @@ import com.example.amazonagencytechtask.model.db_collections.statistics.SalesAnd
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,8 +15,16 @@ public class SalesAndTrafficByAsinRepository {
     private final MongoTemplate mongoTemplate;
 
     public List<SalesAndTrafficByAsin> findDataByAsins(List<String> asins) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("parentAsin").in(asins.toArray()));
-        return mongoTemplate.find(query, SalesAndTrafficByAsin.class);
+        Aggregation aggregation = Aggregation.newAggregation(
+                Aggregation.match(Criteria.where("salesAndTrafficByAsin.parentAsin").in(asins)),
+                Aggregation.unwind("salesAndTrafficByAsin"),
+                Aggregation.match(Criteria.where("salesAndTrafficByAsin.parentAsin").in(asins)),
+                Aggregation.replaceRoot("salesAndTrafficByAsin")
+        );
+
+        AggregationResults<SalesAndTrafficByAsin> results =
+                mongoTemplate.aggregate(aggregation, "reports", SalesAndTrafficByAsin.class);
+
+        return results.getMappedResults();
     }
 }
