@@ -4,6 +4,7 @@ import com.example.amazonagencytechtask.model.db_collections.Report;
 import com.example.amazonagencytechtask.repository.ReportRepository;
 import com.example.amazonagencytechtask.service.CachingService;
 import com.example.amazonagencytechtask.service.FileReaderService;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -37,6 +38,7 @@ public class CustomScheduler {
     private void executeUpdating() {
         updateReportFromFile();
         updateCache();
+        System.out.println(LocalTime.now());
     }
 
     private void updateReportFromFile() {
